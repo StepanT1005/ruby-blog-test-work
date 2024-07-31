@@ -1,0 +1,33 @@
+<%= form_for(resource, as: resource_name, url: url, html: { class: 'needs-validation', novalidate: true }) do |f| %>
+  <%= render "users/shared/error_messages", resource: resource %>
+
+  <div class="form-outline mb-4">
+    <%= f.label :email, class: 'form-label' %>
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control form-control-lg' %>
+  </div>
+
+  <div class="form-outline mb-4">
+    <%= f.label :password, class: 'form-label' %>
+    <%= f.password_field :password, autocomplete: (registration ? "new-password" : "current-password"), class: 'form-control form-control-lg' %>
+  </div>
+
+  <% if registration %>
+    <div class="form-outline mb-4">
+      <%= f.label :password_confirmation, class: 'form-label' %>
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control form-control-lg' %>
+    </div>
+  <% end %>
+
+  <% if devise_mapping.rememberable? && !registration %>
+    <div class="form-check d-flex justify-content-center mb-5">
+      <%= f.check_box :remember_me, class: 'form-check-input me-2' %>
+      <%= f.label :remember_me, class: 'form-check-label' %>
+    </div>
+  <% end %>
+
+  <div class="d-flex justify-content-center">
+    <%= f.submit button_text, class: 'btn btn-success btn-block btn-lg gradient-custom-4 text-body' %>
+  </div>
+
+  <%= yield if block_given? %>
+<% end %>

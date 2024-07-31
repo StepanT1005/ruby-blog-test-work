@@ -1,0 +1,15 @@
+<h1>Posts</h1>
+<%= link_to 'New Post', new_post_path, class: 'btn btn-primary mb-3' %>
+<ul class="list-group">
+  <% @posts.each do |post| %>
+    <li class="list-group-item px-3 border-0 rounded-3 list-group-item-primary mb-3 d-flex  align-items-center justify-content-between ">
+      <%= link_to post.title, post %>
+      <div>
+        <% if post.user == current_user %>
+            <%= link_to 'Edit', edit_post_path(post), class: 'btn btn-warning btn-sm' %>
+            <%= link_to 'Destroy', post, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: 'btn btn-danger btn-sm' %>
+        <% end%>
+      </div>
+    </li>
+  <% end %>
+</ul>
